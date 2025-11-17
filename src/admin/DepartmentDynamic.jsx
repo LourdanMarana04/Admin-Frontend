@@ -88,7 +88,7 @@ const DepartmentDynamic = () => {
   const handleAcceptTransaction = async (queueDetails) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8000/api/queue/accept', {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api'}/queue/accept`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -136,7 +136,7 @@ const DepartmentDynamic = () => {
         requestBody.cancel_reason = cancelReason;
       }
       
-      const response = await fetch('http://localhost:8000/api/queue/cancel', {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api'}/queue/cancel`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -165,7 +165,7 @@ const DepartmentDynamic = () => {
     const fetchQueueData = async () => {
       if (departmentInfo) {
         try {
-          const response = await fetch(`http://localhost:8000/api/queue/status/${departmentInfo.id}`);
+          const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api'}/queue/status/${departmentInfo.id}`);
           if (response.ok) {
             const data = await response.json();
             setQueueData(data);
@@ -248,7 +248,7 @@ const DepartmentDynamic = () => {
     setResetMessage('');
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:8000/api/queue/reset/${departmentInfo.id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api'}/queue/reset/${departmentInfo.id}`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -266,7 +266,7 @@ const DepartmentDynamic = () => {
       setKioskPage(0);
       setWebPage(0);
       // Refetch queue data
-      const queueResponse = await fetch(`http://localhost:8000/api/queue/status/${departmentInfo.id}`);
+      const queueResponse = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api'}/queue/status/${departmentInfo.id}`);
       if (queueResponse.ok) {
         const data = await queueResponse.json();
         setQueueData(data);

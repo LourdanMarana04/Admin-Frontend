@@ -16,7 +16,7 @@ const initialDepartments = [
   { id: 10, name: 'Business Permits and Licensing Office', description: '', transactions: [], active: true },
 ];
 
-const API_BASE_URL = 'http://localhost:8000/api';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api';
 const getAuthHeaders = () => {
   const token = localStorage.getItem('token');
   return {

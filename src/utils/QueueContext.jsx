@@ -16,7 +16,7 @@ export const QueueProvider = ({ children }) => {
 
   const fetchLatestQueueUpdates = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/queue/latest-updates');
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api'}/queue/latest-updates`);
       if (response.ok) {
         const updates = await response.json();
         const updatesMap = {};
@@ -36,7 +36,7 @@ export const QueueProvider = ({ children }) => {
 
   const fetchDepartmentQueueUpdate = async (departmentId) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/queue/latest-update/${departmentId}`);
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api'}/queue/latest-update/${departmentId}`);
       if (response.ok) {
         const update = await response.json();
         if (update) {
